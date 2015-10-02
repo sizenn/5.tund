@@ -2,6 +2,12 @@
 	//laene funktsiooni failis
 	require_once("functions.php");
 
+	//kontrollin, kas kasutaja on sisse loginud
+	if(isset($_SESSION["id_from_db"])){
+		//suunan data lhele
+		header("Location: data.php");
+	}
+	
   // muuutujad errorite jaoks
 	$email_error = "";
 	$password_error = "";

@@ -3,6 +3,10 @@
 	//ühendus loomiseks kasutaja
 	require_once("../configglobal.php");
 	$database = "if15_sizen";
+	
+	//paneme sessiooni käima, saame kasutada $_session
+	session_start();
+	
 	//lisame kasutaja ab'si	
 	function createUser($create_email, $password_hash){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
@@ -32,6 +36,11 @@
 				if($stmt->fetch()){
 					//leidis
 					echo "kasutaja id=".$id_from_db;
+					
+					$_SESSION["id_from_db"] = $id_from_db;
+					$_SESSION["user_email"] = $email_from_db;
+					//suunan kasutaja data.php lehele
+					header("Location: data.php");
 					
 				}else{
 					//tühi, ei leidnud, ju siis midagi valesti
